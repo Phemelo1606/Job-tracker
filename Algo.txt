@@ -1,0 +1,207 @@
+ALGORITHM: ReactTS Job Application Tracker
+
+1. START
+
+2. Initialize project
+   2.1 Install React, React Router, and JSON Server.
+   2.2 Create project structure:
+       - App
+       - pages: LandingPage, LoginPage, RegisterPage, HomePage, JobDetailsPage, NotFoundPage
+       - components: Navbar, JobForm, JobCard, SearchBar, FilterPanel, AuthGuard
+       - services: api.js or jobsService.js
+       - styles: CSS files
+
+3. Set up application state
+   3.1 Create state for:
+       - users
+       - currentUser
+       - jobs
+       - searchTerm
+       - selectedStatus
+       - sortOrder
+       - formMode (add/edit)
+       - selectedJob
+   3.2 Store the app data in JSON Server as a local database.
+
+4. Build authentication flow
+   4.1 On app load, check if a user is logged in.
+   4.2 If no user exists, redirect to Login Page or Landing Page.
+   4.3 On Register Page:
+       - collect username and password
+       - validate required fields
+       - save new user to users array
+       - redirect to Login Page or automatically log in
+   4.4 On Login Page:
+       - collect username and password
+       - validate data
+       - compare credentials with stored users
+       - if valid, set currentUser and store session
+       - if invalid, display error message
+   4.5 Protect routes so only authenticated users can access Home, Job Details, and Add/Edit pages.
+
+5. Build landing page
+   5.1 Display app purpose, benefits, features, and CTA buttons.
+   5.2 Provide links to Login and Registration pages.
+
+6. Build Home Page
+   6.1 If user is authenticated, fetch jobs for the current user from JSON Server.
+   6.2 Display all jobs in a clear card/list layout.
+   6.3 Show a summary count for:
+       - applied
+       - interviewed
+       - rejected
+   6.4 Add search box and filter controls.
+
+7. Implement search functionality
+   7.1 Read the search input value.
+   7.2 Filter jobs by company name or role.
+   7.3 Update URL query string with search parameter, e.g. ?search=Google.
+   7.4 Re-render the filtered list.
+   7.5 If the search is empty, show all jobs.
+
+8. Implement filtering by status
+   8.1 Read selected status value from dropdown or buttons.
+   8.2 Filter jobs where status matches selected status.
+   8.3 Update URL query string with status parameter, e.g. ?status=Interviewed.
+   8.4 Re-render the list based on the new filter.
+
+9. Implement sorting by date
+   9.1 Read sort option: ascending or descending.
+   9.2 Sort jobs by dateApplied.
+   9.3 Update URL query string with sort parameter, e.g. ?sort=asc.
+   9.4 Re-render the list in the selected order.
+
+10. Implement CRUD for jobs
+   10.1 Add Job:
+       - open job form
+       - collect companyName, role, status, dateApplied, duties
+       - validate required inputs
+       - send POST request to JSON Server
+       - update jobs state
+       - reset form
+       - redirect back to Home Page
+
+   10.2 View Job Details:
+       - click a job card
+       - navigate to /job/:id
+       - fetch job by ID
+       - display detailed information such as company, role, duties, status, date, and optional notes
+
+   10.3 Update Job:
+       - click edit button
+       - pre-fill the form with current job values
+       - modify inputs
+       - validate before submission
+       - send PUT or PATCH request to JSON Server
+       - update list and details page
+
+   10.4 Delete Job:
+       - confirm delete action
+       - send DELETE request to JSON Server
+       - remove job from state
+       - update counts and list
+
+11. Use URL queries and parameters
+   11.1 Use React Router to navigate between pages.
+   11.2 Use query parameters for:
+       - search
+       - status
+       - sort
+   11.3 Use route parameters for:
+       - job id on the Job Details page
+   11.4 On page reload, read the URL parameters and restore the filtered/sorted state.
+   11.5 Ensure pages remain predictable when URL values change.
+
+12. Implement responsive design
+   12.1 Use CSS Flexbox and Grid for layouts.
+   12.2 Add breakpoints for mobile, tablet, and desktop sizes.
+   12.3 Ensure buttons, forms, cards, and navigation are usable on smaller screens.
+   12.4 Keep spacing, typography, and color usage consistent.
+
+13. Implement visual status colors
+   13.1 Map status types to colors:
+       - Applied = Yellow
+       - Interviewed = Green
+       - Rejected = Red
+   13.2 Apply these colors to job cards, badges, and filters.
+
+14. Handle errors and validation
+   14.1 Validate empty fields before submission.
+   14.2 Validate date format and required values.
+   14.3 Show meaningful error messages.
+   14.4 Display notifications or toast messages for success and failure states.
+
+15. Implement 404 page
+   15.1 If route does not match any configured page, render NotFoundPage.
+   15.2 Provide a button that redirects user to Home or Landing Page.
+
+16. Main application loop
+   REPEAT
+      16.1 Listen for route changes.
+      16.2 Read URL search params and route params.
+      16.3 Update view state.
+      16.4 Render the appropriate page.
+      16.5 Handle user actions (login, register, add, edit, delete, search, filter, sort).
+      16.6 Update JSON Server and local state.
+      16.7 Refresh the displayed data.
+   UNTIL the application is closed.
+
+17. END
+
+PSEUDOCODE
+
+START
+
+initialize app
+load users and jobs from JSON Server
+if user is logged in then
+    render HomePage
+else
+    render LandingPage
+end if
+
+when user logs in:
+    validate credentials
+    if valid then
+        set currentUser
+        navigate to HomePage
+    else
+        show error
+    end if
+
+when user registers:
+    validate fields
+    save user
+    navigate to LoginPage
+
+when user adds a job:
+    validate required fields
+    post job to JSON Server
+    update jobs state
+    navigate to HomePage
+
+when user edits a job:
+    update selected job in JSON Server
+    refresh job list
+
+when user deletes a job:
+    confirm delete
+    delete item from JSON Server
+    refresh job list
+
+when user searches:
+    set searchTerm from URL query
+    filter jobs by company or role
+
+when user filters:
+    set selectedStatus from URL query
+    filter jobs by status
+
+when user sorts:
+    set sortOrder from URL query
+    sort jobs by date
+
+when route is unknown:
+    render NotFoundPage
+
+END
