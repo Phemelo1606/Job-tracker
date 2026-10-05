@@ -1,0 +1,57 @@
+PSEUDOCODE
+
+START
+
+initialize app
+load users and jobs from JSON Server
+if user is logged in then
+    render HomePage
+else
+    render LandingPage
+end if
+
+when user logs in:
+    validate credentials
+    if valid then
+        set currentUser
+        navigate to HomePage
+    else
+        show error
+    end if
+
+when user registers:
+    validate fields
+    save user
+    navigate to LoginPage
+
+when user adds a job:
+    validate required fields
+    post job to JSON Server
+    update jobs state
+    navigate to HomePage
+
+when user edits a job:
+    update selected job in JSON Server
+    refresh job list
+
+when user deletes a job:
+    confirm delete
+    delete item from JSON Server
+    refresh job list
+
+when user searches:
+    set searchTerm from URL query
+    filter jobs by company or role
+
+when user filters:
+    set selectedStatus from URL query
+    filter jobs by status
+
+when user sorts:
+    set sortOrder from URL query
+    sort jobs by date
+
+when route is unknown:
+    render NotFoundPage
+
+END

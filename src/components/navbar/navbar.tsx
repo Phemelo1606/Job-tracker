@@ -12,7 +12,7 @@ interface NavBarProp {
     onLogout: () => void;
 }
 
-export const navbar = ({ currentUser, onLogout }: NavBarProp) => {
+const NavBar = ({ currentUser, onLogout }: NavBarProp) => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -21,7 +21,7 @@ export const navbar = ({ currentUser, onLogout }: NavBarProp) => {
     };
 
 
-  (
+  return(
     <nav className="navbar">
       <Link to={currentUser ? "/home" : "/"} className="navbar-logo">
         JobTracker
@@ -59,5 +59,7 @@ export const navbar = ({ currentUser, onLogout }: NavBarProp) => {
   );
 }
 
+
+export default NavBar;
 
 
