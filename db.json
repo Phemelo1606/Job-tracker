@@ -1,0 +1,13 @@
+{
+    "users": [],
+    "jobs": [
+        {
+        "id": 1,
+        "userId": 1,
+        "company": "Acme",
+        "position": "Junior Developer",
+        "status": "applied",
+        "dateApplied": "2026-10-01"
+        }
+    ]
+}
