@@ -1,0 +1,147 @@
+.home--main {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+/* Header */
+.appnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+}
+
+.appnav--left,
+.appnav--right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.appnav--logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: inherit;
+    text-decoration: none;
+}
+
+.appnav--user {
+    font-size: 0.875rem;
+}
+
+.appnav--logout {
+    padding: 0.6rem 1rem;
+    background: #fff;
+    border: 1px solid #555;
+    border-radius: 0.5rem;
+    font: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+/* Toolbar */
+.home--toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.home--tabs {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.tab {
+    padding: 0.6rem 1.1rem;
+    background: transparent;
+    border: 0;
+    border-radius: 999px;
+    font: inherit;
+    font-size: 0.8125rem;
+    cursor: pointer;
+}
+
+.tab--active {
+    background: #3f4f46;
+    color: #fff;
+}
+
+.home--search {
+    flex: 1;
+    min-width: 12rem;
+    padding: 0.7rem 1rem;
+    background: #fffaf5;
+    border: 1px solid #e4d9ce;
+    border-radius: 0.5rem;
+    font: inherit;
+    font-size: 0.8125rem;
+}
+
+.home--sort {
+    padding: 0.7rem 1.25rem;
+    background: #c3ccc8;
+    border: 0;
+    border-radius: 0.5rem;
+    font: inherit;
+    font-size: 0.8125rem;
+}
+
+/* Stat cards */
+.home--stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 48rem;
+    margin: 0 auto 3rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat--count {
+    margin: 0.5rem 0;
+    font-size: 3rem;
+    font-weight: 500;
+}
+
+/* Job grid */
+.home--grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+/* Empty / status messages */
+.home--message {
+    text-align: center;
+    color: #5f6b66;
+}
+
+.home--empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 3rem 1rem;
+    text-align: center;
+    background: #cdd6d3;
+    border-radius: 1rem;
+}
+
+.home--empty-title {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+}
+
+@media (max-width: 800px) {
+
+    .home--stats,
+    .home--grid {
+        grid-template-columns: 1fr;
+    }
+}

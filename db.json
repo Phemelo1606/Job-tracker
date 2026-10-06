@@ -1,13 +1,11 @@
 {
-    "users": [],
-    "jobs": [
-        {
-        "id": 1,
-        "userId": 1,
-        "company": "Acme",
-        "position": "Junior Developer",
-        "status": "applied",
-        "dateApplied": "2026-10-01"
-        }
-    ]
+  "users": [
+    {
+      "email": "shopelekae.phemelo11@gmail.com",
+      "password": "$2a$10$4sqT/jU/i0Hd/kNsiUAAaO07Ehnj31AlsSaEpcYwVGjGYaWXyaMOC",
+      "name": "Phemelo SHOPELEKAE",
+      "id": 1
+    }
+  ],
+  "jobs": []
 }

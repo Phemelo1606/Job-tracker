@@ -1,65 +1,34 @@
-import React from 'react';
-import { Link, NavLink, useNavigate } from 'react-router';
-import '../navbar/navbar.module.css';
+import { NavLink, Link, useNavigate } from "react-router";
+import Button from "../Buttons/Button";
+import { useAuth } from "../../context/AuthContext";
 
-interface User {
-    id: number;
-    username: string;
-}
+export default function HomeNavBar() {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
-interface NavBarProp {
-    currentUser: User | null;
-    onLogout: () => void;
-}
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
-const NavBar = ({ currentUser, onLogout }: NavBarProp) => {
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        onLogout();
-        navigate('/login')
-    };
-
-
-  return(
-    <nav className="navbar">
-      <Link to={currentUser ? "/home" : "/"} className="navbar-logo">
-        JobTracker
-      </Link>
-
-      <div className="navbar-links">
-        {currentUser ? (
-          <>
-            <NavLink
-              to="/home"
-              className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
-            >
-              My applications
-            </NavLink>
-            <span className="navbar-user">{currentUser.username}</span>
-            <button className="btn" onClick={handleLogout}>
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <NavLink
-              to="/login"
-              className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
-            >
-              Login
-            </NavLink>
-            <NavLink to="/register" className="btn btn-primary">
-              Register
-            </NavLink>
-          </>
-        )}
+  return (
+    <header className="appnav">
+      <div className="appnav--left">
+        <Link to="/home" className="appnav--logo">
+          Job Tracker
+        </Link>
+        <Button to="/home">Home</Button>
+        <Button to="/jobs/new" variant="outline">
+          Add Job
+        </Button>
       </div>
-    </nav>
+
+      <div className="appnav--right">
+        <span className="appnav--user">{user?.name}</span>
+        <button className="appnav--logout" onClick={handleLogout}>
+          Log Out
+        </button>
+      </div>
+    </header>
   );
 }
-
-
-export default NavBar;
-
-

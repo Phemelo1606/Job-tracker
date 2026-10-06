@@ -1,6 +1,8 @@
 import Card from "./Card";
+import type { JobStatus } from "../../types/jobs";
+export type { JobStatus };
 
-export type JobStatus = "Applied" | "Interviewed" | "Rejected";
+
 
 type JobCardProps = {
   companyName: string;
