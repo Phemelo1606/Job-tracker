@@ -37,6 +37,7 @@
     border-radius: 0.5rem;
     font: inherit;
     font-size: 0.875rem;
+    color: #3f4f46;
     cursor: pointer;
 }
 
@@ -61,6 +62,7 @@
     border-radius: 999px;
     font: inherit;
     font-size: 0.8125rem;
+    color: #3f4f46;
     cursor: pointer;
 }
 
@@ -78,6 +80,7 @@
     border-radius: 0.5rem;
     font: inherit;
     font-size: 0.8125rem;
+    color: #3f4f46;
 }
 
 .home--sort {

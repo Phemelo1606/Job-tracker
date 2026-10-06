@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/RegisterPage";
 import Home from "./pages/HomePage";
 import JobDetails from "./pages/JobDetailsPage";
+import AddJobPage from "./pages/JobForm";
 import NotFound from "./pages/NotFoundPage";
 import "./App.css";
 
@@ -18,6 +19,7 @@ function App() {
       <Route element={<ProtectedRoute />}>
         <Route path="/home" element={<Home />} />
         <Route path="/jobs/:id" element={<JobDetails />} />
+        <Route path="/jobs/new" element={<AddJobPage />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

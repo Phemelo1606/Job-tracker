@@ -7,5 +7,15 @@
       "id": 1
     }
   ],
-  "jobs": []
+  "jobs": [
+    {
+      "userId": 1,
+      "company": "KIM tECH",
+      "position": "it aUDIT",
+      "dateApplied": "2026-10-07",
+      "status": "Applied",
+      "duties": "Audit It",
+      "id": 1
+    }
+  ]
 }
