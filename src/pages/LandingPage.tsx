@@ -53,7 +53,7 @@ export default function LandingPage() {
               <Button to="/register" size="lg">
                 Create an account
               </Button>
-              <Button to="/login" variant="outline" size="lg">
+              <Button to="../pages/Login" variant="outline" size="lg">
                 Log in
               </Button>
             </div>
