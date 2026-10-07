@@ -1,0 +1,197 @@
+.landing {
+  min-height: 100vh;
+}
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 56px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 72px 40px;
+  box-sizing: border-box;
+}
+
+.hero--copy {
+  flex: 1 1 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.hero--title {
+  margin: 0;
+  font: 400 clamp(40px, 6vw, 64px) / 1.02 var(--font-display);
+  color: black;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.hero--text {
+  margin: 0;
+  max-width: 460px;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.hero--actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hero--cards {
+  flex: 1 1 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.features,
+.cta {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 72px;
+}
+
+.section-title {
+  margin: 0 0 22px;
+  font: 400 40px var(--font-display);
+  color: black;
+}
+
+.features--grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.feature {
+  flex: 1 1 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 18px;
+  border-top: 1px solid #b9c8c2;
+}
+
+.feature--title {
+  margin: 0;
+  font-size: 17px;
+}
+
+.feature--text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 72px;
+  padding: 48px;
+  background: var(--surface);
+  border-radius: 10px;
+}
+
+.cta--title {
+  margin: 0;
+  max-width: 420px;
+  font: 400 36px / 1.1 var(--font-display);
+}
+
+.cta--actions {
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 1200px) {
+  .hero {
+    gap: 36px;
+    padding-top: 56px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    padding: 48px 24px 32px;
+  }
+
+  .features,
+  .cta {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    gap: 28px;
+    padding: 40px 18px 28px;
+  }
+
+  .hero--copy,
+  .hero--cards {
+    flex-basis: 100%;
+  }
+
+  .features--grid {
+    gap: 20px;
+  }
+
+  .cta {
+    padding: 28px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero--title {
+    font-size: 2.5rem;
+  }
+
+  .hero--actions,
+  .cta--actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .features,
+  .cta {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 320px) {
+  .hero {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .hero--title {
+    font-size: 2.1rem;
+  }
+
+  .feature--title,
+  .feature--text,
+  .hero--text {
+    font-size: 0.95rem;
+  }
+}
