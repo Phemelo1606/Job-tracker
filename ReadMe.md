@@ -2,6 +2,10 @@
 
 A responsive React and TypeScript app for tracking job applications. Users can record application details, update their status, and find applications using URL-backed search, filters, and sorting.
 
+## Live Demo
+
+[Open the Job Application Tracker](https://jobtracker12.vercel.app/)
+
 ## Features
 
 - Landing, login, registration, dashboard, job details, and not-found pages
