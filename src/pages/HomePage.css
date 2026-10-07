@@ -111,6 +111,16 @@
     font-weight: 500;
 }
 
+.home--cardlink {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.home--cardlink:hover .card {
+    filter: brightness(0.97);
+}
+
 /* Job grid */
 .home--grid {
     display: grid;

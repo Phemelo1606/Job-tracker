@@ -27,6 +27,11 @@ export function useJobs() {
     setJobs((prev) => [...prev, created]); // use the server's response (it has the id)
   }, []);
 
+  const editJob = useCallback(async (id: number, changes: Partial<NewJob>) => {
+  const updated = await api.updateJob(id, changes);
+  setJobs((prev) => prev.map((j) => (j.id === id ? updated : j)));
+}, []);
+
   const changeStatus = useCallback(async (id: number, status: JobStatus) => {
     const updated = await api.updateJobStatus(id, status);
     setJobs((prev) => prev.map((j) => (j.id === id ? updated : j)));
@@ -37,5 +42,5 @@ export function useJobs() {
     setJobs((prev) => prev.filter((j) => j.id !== id));
   }, []);
 
-  return { jobs, loading, error, addJob, changeStatus, removeJob };
+  return { jobs, loading, error, addJob, changeStatus, editJob, removeJob };
 }

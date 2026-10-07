@@ -1,0 +1,96 @@
+.details {
+    display: grid;
+    place-items: start center;
+    padding: 1.5rem;
+}
+
+.details--card {
+    width: 100%;
+    max-width: 34rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background: var(--auth-card);
+    border-radius: 1rem;
+    color: var(--auth-text);
+}
+
+.details--top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.details--title {
+    margin: 0.5rem 0 0.25rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    font-size: 1.75rem;
+}
+
+.details--company {
+    margin: 0 0 0.75rem;
+    font-size: 1rem;
+}
+
+.details--heading {
+    margin-top: 1.25rem;
+}
+
+.details--duties {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    /* keeps the line breaks the user typed */
+}
+
+.details--select {
+    max-width: 12rem;
+    margin-bottom: 0;
+}
+
+.details--form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.75rem;
+}
+
+.details--actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.details--btn {
+    padding: 0.6rem 1.25rem;
+    background: transparent;
+    border: 1px solid var(--auth-muted);
+    border-radius: 0.5rem;
+    font: inherit;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--auth-text);
+    cursor: pointer;
+}
+
+.details--btn-danger {
+    border-color: #8a2c24;
+    color: #8a2c24;
+}
+
+.details--btn-danger:hover:not(:disabled) {
+    background: #8a2c24;
+    color: #fff;
+}
+
+.details--btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.details--error {
+    margin-top: 1rem;
+}

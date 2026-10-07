@@ -5,7 +5,11 @@ import JobCard from "../components/JobCard/JobCard";
 import HomeNavBar from "../components/navbar/NavBar";
 import { useJobs } from "../hooks/useJobs";
 import type { JobStatus } from "../types/jobs";
+import { Link } from "react-router";
 import "./HomePage.css";
+
+
+
 
 type Filter = "All" | JobStatus;
 type Sort = "newest" | "oldest";
@@ -138,17 +142,19 @@ export default function HomePage() {
         )}
 
         {visibleJobs.length > 0 && (
-          <section className="home--grid">
-            {visibleJobs.map((job) => (
-              <JobCard
-                key={job.id}
-                companyName={job.company}
-                role={job.position}
-                status={job.status}
-                dateApplied={formatDate(job.dateApplied)}
-              />
-            ))}
-          </section>
+            <section className="home--grid">
+                {visibleJobs.map((job) => (
+                <Link key={job.id} to={`/jobs/${job.id}`} className="home--cardlink">
+                    <JobCard
+                    companyName={job.company}
+                    role={job.position}
+                    status={job.status}
+                    dateApplied={formatDate(job.dateApplied)}
+                    />
+                </Link>
+                ))}
+            </section>
+
         )}
       </main>
     </div>
