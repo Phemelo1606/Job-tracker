@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      json-server:
+        specifier: 0.17.4
+        version: 0.17.4(supports-color@7.2.0)
+      json-server-auth:
+        specifier: ^2.1.0
+        version: 2.1.0(json-server@0.17.4(supports-color@7.2.0))
       react:
         specifier: ^19.2.8
         version: 19.3.0
@@ -48,12 +54,6 @@ importers:
       globals:
         specifier: ^17.12.0
         version: 17.13.0
-      json-server:
-        specifier: 0.17.4
-        version: 0.17.4(supports-color@7.2.0)
-      json-server-auth:
-        specifier: ^2.1.0
-        version: 2.1.0(json-server@0.17.4(supports-color@7.2.0))
       typescript:
         specifier: ~6.0.2
         version: 6.0.3
