@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import Button from "../components/Buttons/Button";
 import Card from "../components/JobCard/Card";
 import JobCard from "../components/JobCard/JobCard";
-import HomeNavBar from "../components/navbar/NavBar";
+import HomeNavBar from "../components/navbar/navbar";
 import SearchBar from "../components/SearchBar/SearchBar";
 import { useJobs } from "../hooks/useJobs";
 import type { JobStatus } from "../types/jobs";

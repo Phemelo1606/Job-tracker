@@ -1,123 +1,117 @@
 # Job Application Tracker
 
-A React + TypeScript job application tracker that helps users manage applications, search and filter jobs, and track statuses such as Applied, Interviewed, and Rejected.
+A responsive React and TypeScript app for tracking job applications. Users can record application details, update their status, and find applications using URL-backed search, filters, and sorting.
 
-## Project Purpose
+## Features
 
-This application allows users to:
+- Landing, login, registration, dashboard, job details, and not-found pages
+- Registration and login backed by `json-server-auth`
+- Protected dashboard, add-job, and job-details routes
+- Create, read, update, and delete job applications
+- Job fields: company, role, status, application date, and duties
+- Search by company or role; filter by status; sort by application date
+- Status colors: Applied (yellow), Interviewed (green), Rejected (red)
+- Responsive layouts, including mobile navigation
+- Loading and error states for data requests
 
-- register and log in securely
-- add, edit, and delete job applications
-- search jobs by company or role
-- filter jobs by status
-- sort jobs by date
-- view detailed job information on a dedicated job page
-- navigate with React Router using URL queries and route parameters
+## Design
 
-## Main Features
+The interface follows the supplied design and color direction. The project design file is available on [Figma](https://www.figma.com/design/sdD7srVyetSdYilKHwLfKB/Untitled?node-id=0-1&t=HOxzDpPN9FbzSwX6-1).
 
-- Landing page with overview and call-to-action buttons
-- Login page
-- Registration page
-- Home page showing all tracked applications
-- Job details page for more information about each application
-- 404 page for invalid routes
-- Protected routes for authenticated access
-- Status color coding
-- CRUD operations for job entries
-- JSON Server persistence
-- Responsive layout
+## Technology
 
-## Design(Figma)
-
-link :
-
-- https://www.figma.com/design/sdD7srVyetSdYilKHwLfKB/Untitled?node-id=0-1&t=HOxzDpPN9FbzSwX6-1
-
-## Tech Stack
-
-- React
-- TypeScript
+- React 19 and TypeScript
+- Vite
 - React Router
-- JSON Server
+- JSON Server with `json-server-auth`
 - CSS
 
-## Application Flow
+## Routes
 
-1. User lands on the landing page.
-2. User registers or logs in.
-3. Authenticated users can view the home page.
-4. Users can add new job entries with details such as:
-   - company name
-   - role
-   - status
-   - date applied
-   - job duties
-5. Users can search, filter, and sort jobs using URL query parameters.
-6. Users can view detailed job information and update or delete entries.
-7. If a route does not exist, the app displays a 404 page.
+| Path               | Page                            | Access    |
+| ------------------ | ------------------------------- | --------- |
+| `/`                | Landing                         | Public    |
+| `/login`           | Login                           | Public    |
+| `/register`        | Registration                    | Public    |
+| `/home`            | Application dashboard           | Protected |
+| `/jobs/new`        | Add an application              | Protected |
+| `/jobs/:id`        | Application details and editing | Protected |
+| Any unmatched path | Not found                       | Public    |
 
-## Folder Structure
+The dashboard stores its view state in query parameters. For example, `/home?search=design&filter=Interviewed&sort=oldest` searches for "design", filters to Interviewed applications, and sorts oldest first. Supported parameters are `search`, `filter` (`Applied`, `Interviewed`, `Rejected`), and `sort` (`newest`, `oldest`). Default values are omitted from the URL.
 
-```bash
-src/
-  components/
-    Navbar
-    JobForm
-    JobCard
-    SearchBar
-    FilterPanel
-    StatusBadge
-    AuthGuard
-  pages/
-    LandingPage
-    LoginPage
-    RegisterPage
-    HomePage
-    JobDetailsPage
-    NotFoundPage
-  services/
-    api.js
-  App.tsx
-  main.tsx
-  styles/
-    app.css
-```
+## Run Locally
 
-## Local Setup
+Prerequisites: Node.js and npm.
 
-1. Clone the project repository.
+1. Clone the repository and enter the project folder.
 2. Install dependencies:
+
    ```bash
    npm install
    ```
-3. Start the JSON server:
+
+3. Start the Vite app and JSON Server together:
+
    ```bash
-   npx json-server --watch db.json
+   npm run dev:all
    ```
-4. Start the React app:
-   ```bash
-   npm start
-   ```
-5. Open the application in the browser.
 
-## Notes
+4. Open the local URL printed by Vite, normally `http://localhost:5173`.
 
-- Use protected routing so only logged-in users can access private pages.
-- Keep URLs predictable by syncing search, filter, and sort states with query parameters.
-- Validate form inputs before saving data.
-- Use consistent colors for statuses:
-  - Applied = Yellow
-  - Interviewed = Green
-  - Rejected = Red
+Alternatively, run the frontend and API in separate terminals with `npm run dev` and `npm run server`. The API runs on port `3001`; the frontend defaults to that local API URL.
 
-## Future Improvements
+## Configuration
 
-- Add user-specific data storage by user ID
-- Add job notes and interview reminders
-- Add chart summaries for application progress
-- Add edit mode improvements and better validation feedback
+To use a separately hosted API, define `VITE_API_URL` in a local `.env.local` file:
 
-## Summary
+```env
+VITE_API_URL=https://your-api-host.example
+```
 
-This project is a small but complete job application tracker MVP designed to practice React routing, forms, state management, URL queries, protected routes, and JSON Server integration.
+Do not add private credentials or real user data to the repository. `json-server-auth` and the JSON file are intended for this learning project and are not a production authentication or database solution. A hosted deployment needs a persistent database and appropriate security controls.
+
+## Project Structure
+
+```text
+src/
+  api/          API request helpers for authentication and jobs
+  components/   Reusable buttons, cards, search, and navigation
+  context/      Authentication state
+  hooks/        Job data and CRUD operations
+  pages/        Landing, authentication, dashboard, forms, details, 404
+  types/        TypeScript data models
+  App.tsx       Route definitions and protected route composition
+db.json         JSON Server data
+routes.json     JSON Server Auth route configuration
+```
+
+## Application Logic
+
+1. A visitor registers or logs in; authentication state and token are persisted locally.
+2. Protected routes check authentication before displaying application data.
+3. The dashboard requests the signed-in user's jobs and computes the status totals.
+4. Search, filter, and sort values are read from the URL; changing a control updates the corresponding query parameter.
+5. Creating, editing, or deleting an application sends the matching API request, then refreshes the displayed data.
+6. Selecting a job opens `/jobs/:id`; unmatched paths display the not-found page.
+
+## Assignment Checklist
+
+- [x] Six required page types and a not-found route
+- [x] Job create, read, update, and delete operations
+- [x] Search, status filters, and date sorting represented in the URL
+- [x] Route parameters for individual job details and protected routes
+- [x] Responsive styling with the requested 320, 480, 768, 1024, and 1200 px breakpoints
+- [x] Form-required fields, loading feedback, and request error messages
+- [ ] Run the app through the target screen sizes and test the main user flows before submission
+- [ ] Push the final work to GitHub and open a pull request to the main branch with the mentor assigned
+- [ ] Submit the task using the required submission form
+
+The design file is linked above. Keep any separate planning, pseudocode, or algorithm artifacts with the project submission if they are required by the course; the application logic summary in this README is not a replacement for those deliverables.
+
+## Verification
+
+```bash
+npm run lint
+npm run build
+```

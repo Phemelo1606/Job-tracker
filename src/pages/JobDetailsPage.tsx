@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate, useParams } from "react-router";
-import HomeNavBar from "../components/navbar/NavBar";
+import HomeNavBar from "../components/navbar/navbar";
 import { useJobs } from "../hooks/useJobs";
 import type { Job, JobStatus, NewJob } from "../types/jobs";
 import "../components/Auth.css";
