@@ -298,7 +298,7 @@
     flex: 1;
     min-width: 12rem;
     padding: 0.7rem 1rem;
-    background: #fffaf5;
+    background: #c3ccc8;
     border: 1px solid #e4d9ce;
     border-radius: 0.5rem;
     font: inherit;
@@ -313,6 +313,7 @@
     border-radius: 0.5rem;
     font: inherit;
     font-size: 0.8125rem;
+    color: #2f473f;
 }
 
 /* Stat cards */
