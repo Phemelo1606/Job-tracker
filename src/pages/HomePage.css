@@ -9,7 +9,38 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
     padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(31, 43, 39, 0.15);
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.appnav--brandrow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+    flex: 0 0 auto;
+}
+
+.appnav--utility {
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    margin-left: auto;
+}
+
+.appnav--menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    width: auto;
+    gap: 1rem;
+}
+
+.appnav--menu-heading {
+    display: none;
 }
 
 .appnav--left,
@@ -19,8 +50,12 @@
     gap: 1rem;
 }
 
+.appnav--right {
+    margin-left: auto;
+}
+
 .appnav--logo {
-    font-size: 2rem;
+    font-size: clamp(1.6rem, 2vw, 2rem);
     font-weight: 700;
     color: inherit;
     text-decoration: none;
@@ -28,6 +63,9 @@
 
 .appnav--user {
     font-size: 0.875rem;
+    font-weight: 600;
+    color: #3f4f46;
+    white-space: nowrap;
 }
 
 .appnav--logout {
@@ -39,6 +77,191 @@
     font-size: 0.875rem;
     color: #3f4f46;
     cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.appnav--logout:hover {
+    background: #f3f6f3;
+    transform: translateY(-1px);
+}
+
+.appnav--toggle {
+    display: none;
+    width: 2.8rem;
+    height: 2.8rem;
+    padding: 0.55rem;
+    border: 1px solid rgba(31, 43, 39, 0.2);
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+}
+
+.appnav--toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    margin: 0.32rem 0;
+    border-radius: 1px;
+    background: #2f473f;
+}
+
+@media (max-width: 1200px) {
+    .appnav {
+        padding: 0.9rem 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .appnav {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.8rem 0.9rem;
+    }
+
+    .appnav--brandrow {
+        width: 100%;
+    }
+
+    .appnav--utility {
+        display: flex;
+        gap: 0.6rem;
+    }
+
+    .appnav--utility .appnav--user {
+        display: inline;
+    }
+
+    .appnav--right .appnav--user {
+        display: none;
+    }
+
+    .appnav--user {
+        font-size: 0.8rem;
+        line-height: 1.2;
+    }
+
+    .appnav--toggle {
+        display: block;
+    }
+
+    .appnav--menu {
+        position: fixed;
+        flex: none;
+        z-index: 1002;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        width: min(82vw, 21rem);
+        gap: 1.5rem;
+        padding: 1.25rem;
+        background: rgba(245, 248, 246, 0.78);
+        border-left: 1px solid rgba(31, 43, 39, 0.16);
+        box-shadow: -1rem 0 3rem rgba(22, 35, 29, 0.14);
+        -webkit-backdrop-filter: blur(18px);
+        backdrop-filter: blur(18px);
+        transform: translateX(105%);
+        visibility: hidden;
+        transition: transform 0.25s ease, visibility 0.25s ease;
+    }
+
+    .appnav--menu-open {
+        transform: translateX(0);
+        visibility: visible;
+    }
+
+    .appnav--backdrop {
+        position: fixed;
+        z-index: 1001;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        border: 0;
+        background: rgba(23, 35, 30, 0.18);
+        -webkit-backdrop-filter: blur(3px);
+        backdrop-filter: blur(3px);
+        cursor: default;
+        animation: appnav-backdrop-in 0.2s ease both;
+    }
+
+    .appnav--menu-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(31, 43, 39, 0.14);
+        color: #2f473f;
+        font-weight: 700;
+    }
+
+    .appnav--close {
+        padding: 0.45rem 0.65rem;
+        border: 1px solid rgba(31, 43, 39, 0.2);
+        border-radius: 0.5rem;
+        background: rgba(255, 255, 255, 0.45);
+        color: #3f4f46;
+        font: inherit;
+        font-size: 0.75rem;
+        cursor: pointer;
+    }
+
+    .appnav--left,
+    .appnav--right {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 0.65rem;
+    }
+
+    .appnav--left .btn,
+    .appnav--right .appnav--logout {
+        width: 100%;
+        justify-content: center;
+        min-height: 2.6rem;
+        padding: 0.7rem 0.9rem;
+        font-size: 0.78rem;
+        border-radius: 0.7rem;
+    }
+
+}
+
+@keyframes appnav-backdrop-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .appnav--menu,
+    .appnav--backdrop {
+        transition: none;
+        animation: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .appnav {
+        padding: 0.7rem 0.75rem;
+    }
+
+    .appnav--logo {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .appnav--logo {
+        font-size: 1.3rem;
+    }
+
+    .appnav--toggle {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
 }
 
 /* Toolbar */
@@ -151,10 +374,92 @@
     font-weight: 400;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1200px) {
+    .home--grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 
-    .home--stats,
+@media (max-width: 1024px) {
+    .home--stats {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
     .home--grid {
         grid-template-columns: 1fr;
+    }
+
+    .home--stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.65rem;
+        max-width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .card.stat {
+        min-width: 0;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.85rem 0.45rem;
+    }
+
+    .stat .label {
+        font-size: 0.5rem;
+        letter-spacing: 0.04em;
+        text-align: center;
+    }
+
+    .stat--count {
+        margin: 0.1rem 0;
+        font-size: 2.25rem;
+        line-height: 1.1;
+    }
+
+    .stat .badge {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0.25rem 0.15rem;
+        font-size: 0.58rem;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .home--toolbar {
+        align-items: stretch;
+    }
+
+    .home--search,
+    .home--sort {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .home--main {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    .appnav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .appnav--left,
+    .appnav--right {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 320px) {
+    .tab {
+        width: 100%;
+        text-align: center;
+    }
+
+    .home--toolbar {
+        padding: 0.75rem;
     }
 }
