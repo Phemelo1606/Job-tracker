@@ -7,5 +7,24 @@
       "id": 1
     }
   ],
-  "jobs": []
+  "jobs": [
+    {
+      "userId": 1,
+      "company": "Diamond Tech",
+      "position": "Front-end Dev",
+      "dateApplied": "2026-10-05",
+      "status": "Rejected",
+      "duties": "Developing front end of apps, maintaining front end",
+      "id": 1
+    },
+    {
+      "userId": 1,
+      "company": "Oracle",
+      "position": "SQL dev",
+      "dateApplied": "2026-10-06",
+      "status": "Interviewed",
+      "duties": "Maintain Databases",
+      "id": 2
+    }
+  ]
 }

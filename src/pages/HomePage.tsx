@@ -1,20 +1,21 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import Button from "../components/Buttons/Button";
 import Card from "../components/JobCard/Card";
 import JobCard from "../components/JobCard/JobCard";
 import HomeNavBar from "../components/navbar/NavBar";
+import SearchBar from "../components/SearchBar/SearchBar";
 import { useJobs } from "../hooks/useJobs";
 import type { JobStatus } from "../types/jobs";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import "./HomePage.css";
-
-
-
 
 type Filter = "All" | JobStatus;
 type Sort = "newest" | "oldest";
 
 const FILTERS: JobStatus[] = ["Applied", "Interviewed", "Rejected"];
+
+const DEFAULT_FILTER: Filter = "All";
+const DEFAULT_SORT: Sort = "newest";
 
 // The label shown on each stat card's badge
 const STATS: { status: JobStatus; badge: string }[] = [
@@ -32,9 +33,43 @@ const formatDate = (iso: string) =>
 
 export default function HomePage() {
   const { jobs, loading, error } = useJobs();
-  const [filter, setFilter] = useState<Filter>("All");
-  const [search, setSearch] = useState("");
-  const [sort, setSort] = useState<Sort>("newest");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Read state from the URL, validating so a hand-edited URL can't break the page
+  const rawFilter = searchParams.get("filter");
+  const filter: Filter =
+    rawFilter && (FILTERS as string[]).includes(rawFilter)
+      ? (rawFilter as JobStatus)
+      : DEFAULT_FILTER;
+
+  const rawSort = searchParams.get("sort");
+  const sort: Sort = rawSort === "oldest" ? "oldest" : DEFAULT_SORT;
+
+  const search = searchParams.get("search") ?? "";
+
+  // Write one param, drop it from the URL when it equals the default,
+  // and keep the other params intact
+  const updateParam = (
+    key: "search" | "filter" | "sort",
+    value: string,
+    defaultValue = "",
+    replace = false
+  ) => {
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        if (!value || value === defaultValue) next.delete(key);
+        else next.set(key, value);
+        return next;
+      },
+      { replace }
+    );
+  };
+
+  const setFilter = (f: Filter) => updateParam("filter", f, DEFAULT_FILTER);
+  const setSort = (s: Sort) => updateParam("sort", s, DEFAULT_SORT);
+  // replace: true so typing doesn't add a history entry per keystroke
+  const setSearch = (q: string) => updateParam("search", q, "", true);
 
   // Counts always come from ALL jobs, not the filtered list
   const counts = useMemo(
@@ -88,13 +123,12 @@ export default function HomePage() {
             ))}
           </div>
 
-          <input
+          <SearchBar
             className="home--search"
-            type="search"
             placeholder="Search company or role..."
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            aria-label="Search jobs"
+            onChange={setSearch}
+            ariaLabel="Search jobs"
           />
 
           <select
@@ -142,19 +176,22 @@ export default function HomePage() {
         )}
 
         {visibleJobs.length > 0 && (
-            <section className="home--grid">
-                {visibleJobs.map((job) => (
-                <Link key={job.id} to={`/jobs/${job.id}`} className="home--cardlink">
-                    <JobCard
-                    companyName={job.company}
-                    role={job.position}
-                    status={job.status}
-                    dateApplied={formatDate(job.dateApplied)}
-                    />
-                </Link>
-                ))}
-            </section>
-
+          <section className="home--grid">
+            {visibleJobs.map((job) => (
+              <Link
+                key={job.id}
+                to={`/jobs/${job.id}`}
+                className="home--cardlink"
+              >
+                <JobCard
+                  companyName={job.company}
+                  role={job.position}
+                  status={job.status}
+                  dateApplied={formatDate(job.dateApplied)}
+                />
+              </Link>
+            ))}
+          </section>
         )}
       </main>
     </div>
